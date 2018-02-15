@@ -15,7 +15,7 @@ LABEL \
 	org.label-schema.name="elk6" \
 	org.label-schema.description="Docker version of Elasticsearch, Logstash and Kibana 6 based on Alpine Linux" \
 	org.label-schema.version="${VERSION}" \
-	org.label-schema.vcs-url="https://github.com/githubcdr/docker-elk" \
+	org.label-schema.vcs-url="https://github.com/PB-Orid/v3elkorg1" \
 	org.label-schema.schema-version="1.0"
 
 #  /tmp all in
