@@ -1,7 +1,7 @@
-# required for full openssl support
+# needs full openssl support
 FROM anapsix/alpine-java:latest
 
-# changeables
+# updates to latest version
 ENV VERSION=6.2.1
 ENV PKGS="s6 ca-certificates openssl wget unzip git tar nodejs coreutils"
 ENV ES_URL="https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${VERSION}.tar.gz"
@@ -18,10 +18,10 @@ LABEL \
 	org.label-schema.vcs-url="https://github.com/githubcdr/docker-elk" \
 	org.label-schema.schema-version="1.0"
 
-# do all in /tmp
+#  /tmp all in
 WORKDIR	/tmp
 
-# all-in-one RUN creates nice small images
+#  a nice small images of elk
 RUN apk    add --update --no-cache ${PKGS} \
 	&& mkdir -p /opt/elasticsearch /opt/kibana /opt/logstash/patterns /opt/logstash/databases /var/lib/elasticsearch \
 	&& adduser -D -h /opt/elasticsearch elasticsearch \
@@ -41,13 +41,13 @@ RUN apk    add --update --no-cache ${PKGS} \
 	&& ln -s /opt/jdk/bin/java /usr/bin/java \
 	&& rm -rf /tmp/*
 
-# add files, this also creates the layout for the filesystem
+# this will create layout for the filesystem
 COPY files/root/ /
 
-# fix permissions, note that each run file also resets permissions at start
+# fix, resets permissions at start
 RUN	   chmod a+x /service/*/run
 
-# open following network ports
+# elk ports
 # 5601 kibana
 # 9200 elasticsearch rest
 # 9300 elasticsearch nodes
